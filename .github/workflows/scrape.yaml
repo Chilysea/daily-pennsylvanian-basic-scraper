@@ -44,7 +44,7 @@ jobs:
         run: |
           touch Pipfile
           if [ -f Pipfile.lock ]; then
-            pipenv install --deploy --dev
+            pipenv install --deploy --dev --skip-lock
           else
             pipenv install --dev
           fi
