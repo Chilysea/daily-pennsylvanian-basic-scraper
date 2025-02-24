@@ -20,7 +20,7 @@ def scrape_data_point():
 
     Returns:
         str: The headline text if found, otherwise an empty string.
-    
+    """
     
     req = requests.get("https://www.thedp.com")
     loguru.logger.info(f"Request URL: {req.url}")
@@ -32,25 +32,7 @@ def scrape_data_point():
         data_point = "" if target_element is None else target_element.text
         loguru.logger.info(f"Data point: {data_point}")
         return data_point
-    """
 
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    }
-    time.sleep(10)
-    req = requests.get("https://www.thedp.com", headers=headers)
-    loguru.logger.info(f"Request URL: {req.url}")
-    loguru.logger.info(f"Request status code: {req.status_code}")
-
-    if req.ok:
-        soup = bs4.BeautifulSoup(req.text, "html.parser")
-        target_element = soup.find("a", class_="frontpage-link")
-        data_point = "" if target_element is None else target_element.text.strip()
-        loguru.logger.info(f"Data point: {data_point}")
-        return data_point
-    else:
-        loguru.logger.error("Failed to fetch page. The website may be blocking scrapers.")
-        return ""
 
 if __name__ == "__main__":
 
@@ -64,19 +46,6 @@ if __name__ == "__main__":
     except Exception as e:
         loguru.logger.error(f"Failed to create data directory: {e}")
         sys.exit(1)
-
-    file_path = "data/daily_pennsylvanian_headlines.json"
-
-# Ensure the data directory exists
-if not os.path.exists("data"):
-    os.makedirs("data")
-    loguru.logger.info("Created 'data' directory")
-
-# Check if the file exists before trying to load it
-if not os.path.exists(file_path):
-    loguru.logger.warning("No data file found. Creating an empty JSON file.")
-    with open(file_path, "w") as f:
-        json.dump({}, f)  # Create an empty JSON structure
         
     # Load daily event monitor
     loguru.logger.info("Loading daily event monitor")
