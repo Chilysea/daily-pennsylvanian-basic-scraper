@@ -65,6 +65,19 @@ if __name__ == "__main__":
         loguru.logger.error(f"Failed to create data directory: {e}")
         sys.exit(1)
 
+    file_path = "data/daily_pennsylvanian_headlines.json"
+
+# Ensure the data directory exists
+if not os.path.exists("data"):
+    os.makedirs("data")
+    loguru.logger.info("Created 'data' directory")
+
+# Check if the file exists before trying to load it
+if not os.path.exists(file_path):
+    loguru.logger.warning("No data file found. Creating an empty JSON file.")
+    with open(file_path, "w") as f:
+        json.dump({}, f)  # Create an empty JSON structure
+        
     # Load daily event monitor
     loguru.logger.info("Loading daily event monitor")
     dem = daily_event_monitor.DailyEventMonitor(
