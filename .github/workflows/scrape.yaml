@@ -43,12 +43,7 @@ jobs:
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
           touch Pipfile
-          if [ -f Pipfile.lock ]; then
-            pipenv install --deploy --dev --skip-lock
-          else
-            pipenv install --dev
-          fi
-
+          pipenv install --deploy --dev
 
       - name: 🕵️‍♂️ Scrape content and output
         run: |
