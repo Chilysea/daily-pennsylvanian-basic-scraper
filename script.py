@@ -5,6 +5,7 @@ JSON file that tracks headlines over time.
 
 import os
 import sys
+import time
 
 import daily_event_monitor
 
