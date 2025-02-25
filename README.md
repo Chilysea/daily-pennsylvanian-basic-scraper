@@ -135,3 +135,7 @@ But it is important to use it responsibly and ethically. Here are some guideline
 9. Document your scraping process thoroughly for replicability, transparency and accountability.
 
 10. Continuously re-evaluate your scraping program against applicable laws and ethical principles.
+
+## Modification
+
+ The original scraper used soup.find("a", class_="frontpage-link") to locate the main headline on The Daily Pennsylvanian’s homepage. In this modified version, I used target_element = soup.select_one(".most-read-list li a") to target the most-read article by selecting the first link (<a>) inside a “Most Read” section. By scraping the number 1 most-read article, we capture the story that readers are gravitating towards the most, which is often a more interesting metric for daily snapshots or archives.
